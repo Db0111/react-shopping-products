@@ -8656,8 +8656,8 @@ function ErrorFallback({ message }) {
     /* @__PURE__ */ jsxRuntimeExports.jsx(Message$1, { children: message })
   ] });
 }
-const DataContext = reactExports.createContext(null);
-function DataProvider({ children }) {
+const APIContext = reactExports.createContext(null);
+function APIProvider({ children }) {
   const [data, setData] = reactExports.useState({});
   const [isLoading, setIsLoading] = reactExports.useState({});
   const [error, setError] = reactExports.useState({});
@@ -8669,7 +8669,7 @@ function DataProvider({ children }) {
     []
   );
   return /* @__PURE__ */ jsxRuntimeExports.jsx(
-    DataContext.Provider,
+    APIContext.Provider,
     {
       value: {
         data,
@@ -8686,70 +8686,6 @@ function DataProvider({ children }) {
     }
   );
 }
-class HTTPClient {
-  constructor(baseUrl, apiKey) {
-    __publicField(this, "baseUrl", "");
-    __publicField(this, "apiKey", "");
-    this.baseUrl = baseUrl;
-    this.apiKey = apiKey || "";
-  }
-  getHeaders() {
-    return {
-      "Content-Type": "application/json",
-      ...this.apiKey && { Authorization: this.apiKey }
-    };
-  }
-  async get(url) {
-    const response = await fetch(this.baseUrl + url, {
-      headers: this.getHeaders()
-    });
-    return response;
-  }
-  async post(url, data) {
-    const response = await fetch(this.baseUrl + url, {
-      method: "POST",
-      headers: this.getHeaders(),
-      body: JSON.stringify(data)
-    });
-    return response;
-  }
-  async patch(url, data) {
-    const response = await fetch(this.baseUrl + url, {
-      method: "PATCH",
-      headers: this.getHeaders(),
-      body: JSON.stringify(data)
-    });
-    return response;
-  }
-  async delete(url) {
-    const response = await fetch(this.baseUrl + url, {
-      method: "DELETE",
-      headers: this.getHeaders()
-    });
-    return response;
-  }
-  setApiKey(apiKey) {
-    this.apiKey = apiKey;
-  }
-}
-const BASE_URL = "http://techcourse-lv2-alb-974870821.ap-northeast-2.elb.amazonaws.com";
-const API_KEY = "Basic RGIwMTExOnBhc3N3b3Jk";
-const httpClient = new HTTPClient(BASE_URL, API_KEY);
-const ERROR_MESSAGE$4 = "징바구니를 가져오는 데 실패했습니다.";
-const getCartItems = async () => {
-  const url = new URLSearchParams({
-    page: "0",
-    size: "50",
-    sort: "asc"
-    // 현재 요구사항 정렬 기준이 없으므로 기본값으로 설정
-  });
-  const response = await httpClient.get(`/cart-items?${url.toString()}`);
-  if (!response.ok) {
-    throw new Error(ERROR_MESSAGE$4);
-  }
-  const data = await response.json();
-  return data.content;
-};
 const planetLoadingImage = "/react-shopping-products/assets/planet-loading-C4bWgBE2.png";
 function LoadingFallback({ message }) {
   return /* @__PURE__ */ jsxRuntimeExports.jsxs(Container$5, { children: [
@@ -8939,7 +8875,6 @@ const buttonTheme = {
 const Button$2 = newStyled.button`
   background-color: ${({ variant }) => buttonTheme[variant].background};
   color: ${({ variant }) => buttonTheme[variant].text};
-  padding: 8px 12px;
   padding: ${({ variant }) => variant === "outline" ? "4px 8px" : "8px 16px"};
   display: flex;
   gap: 4px;
@@ -8959,6 +8894,7 @@ const Button$2 = newStyled.button`
   if (variant === "outline") {
     return `12px`;
   }
+  return "14px";
 }};
 
   white-space: nowrap;
@@ -8974,14 +8910,63 @@ function Button$1({ children, ...props }) {
   return /* @__PURE__ */ jsxRuntimeExports.jsx(Button$2, { ...props, children });
 }
 const addCartItemIcon = "data:image/svg+xml,%3csvg%20xmlns='http://www.w3.org/2000/svg'%20width='16'%20height='17'%20viewBox='0%200%2016%2017'%20fill='none'%3e%3cg%20clip-path='url(%23clip0_3830_185)'%3e%3cpath%20d='M7.33329%206.85232H8.66663V4.85232H10.6666V3.51898H8.66663V1.51898H7.33329V3.51898H5.33329V4.85232H7.33329V6.85232ZM4.66663%2012.8523C3.93329%2012.8523%203.33996%2013.4523%203.33996%2014.1856C3.33996%2014.919%203.93329%2015.519%204.66663%2015.519C5.39996%2015.519%205.99996%2014.919%205.99996%2014.1856C5.99996%2013.4523%205.39996%2012.8523%204.66663%2012.8523ZM11.3333%2012.8523C10.6%2012.8523%2010.0066%2013.4523%2010.0066%2014.1856C10.0066%2014.919%2010.6%2015.519%2011.3333%2015.519C12.0666%2015.519%2012.6666%2014.919%2012.6666%2014.1856C12.6666%2013.4523%2012.0666%2012.8523%2011.3333%2012.8523ZM4.77996%2010.6856L4.79996%2010.6056L5.39996%209.51898H10.3666C10.8666%209.51898%2011.3066%209.24565%2011.5333%208.83232L14.1066%204.15898L12.9466%203.51898H12.94L12.2066%204.85232L10.3666%208.18565H5.68663L5.59996%208.00565L4.10663%204.85232L3.47329%203.51898L2.84663%202.18565H0.666626V3.51898H1.99996L4.39996%208.57898L3.49996%2010.2123C3.39329%2010.399%203.33329%2010.619%203.33329%2010.8523C3.33329%2011.5856%203.93329%2012.1856%204.66663%2012.1856H12.6666V10.8523H4.94663C4.85996%2010.8523%204.77996%2010.779%204.77996%2010.6856Z'%20fill='white'/%3e%3c/g%3e%3cdefs%3e%3cclipPath%20id='clip0_3830_185'%3e%3crect%20width='16'%20height='16'%20fill='white'%20transform='translate(0%200.852295)'/%3e%3c/clipPath%3e%3c/defs%3e%3c/svg%3e";
-const ERROR_MESSAGE$3 = "장바구니에 상품을 추가하던 중 에러가 발생했습니다.";
+class HTTPClient {
+  constructor(baseUrl, apiKey) {
+    __publicField(this, "baseUrl", "");
+    __publicField(this, "apiKey", "");
+    this.baseUrl = baseUrl;
+    this.apiKey = apiKey || "";
+  }
+  getHeaders() {
+    return {
+      "Content-Type": "application/json",
+      ...this.apiKey && { Authorization: this.apiKey }
+    };
+  }
+  async get(url) {
+    const response = await fetch(this.baseUrl + url, {
+      headers: this.getHeaders()
+    });
+    return response;
+  }
+  async post(url, data) {
+    const response = await fetch(this.baseUrl + url, {
+      method: "POST",
+      headers: this.getHeaders(),
+      body: JSON.stringify(data)
+    });
+    return response;
+  }
+  async patch(url, data) {
+    const response = await fetch(this.baseUrl + url, {
+      method: "PATCH",
+      headers: this.getHeaders(),
+      body: JSON.stringify(data)
+    });
+    return response;
+  }
+  async delete(url) {
+    const response = await fetch(this.baseUrl + url, {
+      method: "DELETE",
+      headers: this.getHeaders()
+    });
+    return response;
+  }
+  setApiKey(apiKey) {
+    this.apiKey = apiKey;
+  }
+}
+const BASE_URL = "http://techcourse-lv2-alb-974870821.ap-northeast-2.elb.amazonaws.com";
+const API_KEY = "Basic RGIwMTExOnBhc3N3b3Jk";
+const httpClient = new HTTPClient(BASE_URL, API_KEY);
+const ERROR_MESSAGE$4 = "장바구니에 상품을 추가하던 중 에러가 발생했습니다.";
 const addCartItems = async ({ productId, quantity }) => {
   const response = await httpClient.post("/cart-items", {
     productId,
     quantity
   });
   if (!response.ok) {
-    throw new Error(ERROR_MESSAGE$3);
+    throw new Error(ERROR_MESSAGE$4);
   }
 };
 const useMutation = (mutationFn) => {
@@ -9033,13 +9018,28 @@ function AlertToast({ type, message }) {
   }
   return /* @__PURE__ */ jsxRuntimeExports.jsx(Container$4, { type, children: /* @__PURE__ */ jsxRuntimeExports.jsx(Message, { children: message }) });
 }
+const ERROR_MESSAGE$3 = "징바구니를 가져오는 데 실패했습니다.";
+const getCartItems = async () => {
+  const url = new URLSearchParams({
+    page: "0",
+    size: "50",
+    sort: "asc"
+    // 현재 요구사항 정렬 기준이 없으므로 기본값으로 설정
+  });
+  const response = await httpClient.get(`/cart-items?${url.toString()}`);
+  if (!response.ok) {
+    throw new Error(ERROR_MESSAGE$3);
+  }
+  const data = await response.json();
+  return data.content;
+};
 function AddCartItemButton({ id: id2, disabled }) {
   const { mutate, isLoading, error } = useMutation(
     () => addCartItems({ productId: id2, quantity: 1 })
   );
-  const context = reactExports.useContext(DataContext);
+  const context = reactExports.useContext(APIContext);
   if (!context) {
-    throw new Error("RemoveCartItemButton must be used within a DataProvider");
+    throw new Error("AddCartItemButton must be used within a DataProvider");
   }
   const { setData } = context;
   const handleClick = async () => {
@@ -9203,9 +9203,18 @@ function QuantityCounter({
   onDecrease
 }) {
   return /* @__PURE__ */ jsxRuntimeExports.jsxs(Container$3, { children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsx(Button, { onClick: onDecrease, "data-testid": "decrease-button", children: /* @__PURE__ */ jsxRuntimeExports.jsx(Icon, { src: minusIcon, alt: "Decrease" }) }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(
+      Button,
+      {
+        onClick: onDecrease,
+        "data-testid": "decrease-button",
+        role: "button",
+        "aria-label": "빼기",
+        children: /* @__PURE__ */ jsxRuntimeExports.jsx(Icon, { src: minusIcon, alt: "Decrease" })
+      }
+    ),
     /* @__PURE__ */ jsxRuntimeExports.jsx(Quantity, { children: quantity }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx(Button, { onClick: onIncrease, children: /* @__PURE__ */ jsxRuntimeExports.jsx(Icon, { src: plusIcon, alt: "Increase" }) })
+    /* @__PURE__ */ jsxRuntimeExports.jsx(Button, { onClick: onIncrease, role: "button", "aria-label": "더하기", children: /* @__PURE__ */ jsxRuntimeExports.jsx(Icon, { src: plusIcon, alt: "Increase" }) })
   ] });
 }
 const ERROR_MESSAGE$2 = "장바구니에 상품을 제거하던 중 에러가 발생했습니다.";
@@ -9228,9 +9237,9 @@ const updateCartItems = async ({
   }
 };
 function ProductItem({ product, variant }) {
-  const context = reactExports.useContext(DataContext);
+  const context = reactExports.useContext(APIContext);
   if (!context)
-    throw new Error("DataContext must be used within a DataProvider");
+    throw new Error("APIContext must be used within a DataProvider");
   const { data, setData, error, setError } = context;
   const cartItemData = data.cartItemData;
   const { id: id2, name, price, imageUrl, quantity } = product;
@@ -9260,10 +9269,9 @@ function ProductItem({ product, variant }) {
           cartItemData: updatedCartItems
         }));
       } catch (error2) {
-        console.error("수량 증가 실패", error2);
         setError((prev2) => ({
           ...prev2,
-          cartItemData: error2 instanceof Error ? error2.message : "알 수 없는 오류가 발생하였습니다."
+          cartItemData: error2 instanceof Error ? error2.message : "상품의 수량을 증가시키는 과정에서 오류가 발생하였습니다."
         }));
       }
     }
@@ -9279,7 +9287,10 @@ function ProductItem({ product, variant }) {
             cartItemData: updatedCartItems
           }));
         } catch (error2) {
-          console.error("장바구니 삭제 실패:", error2);
+          setError((prev2) => ({
+            ...prev2,
+            cartItemData: error2 instanceof Error ? error2.message : "장바구니에서 상품을 삭제하는 과정에서 오류가 발생하였습니다."
+          }));
         }
       }
     } else {
@@ -9296,7 +9307,10 @@ function ProductItem({ product, variant }) {
             cartItemData: updatedCartItems
           }));
         } catch (error2) {
-          console.error("수량 감소 실패", error2);
+          setError((prev2) => ({
+            ...prev2,
+            cartItemData: error2 instanceof Error ? error2.message : "상품의 수량을 감소시키는 과정에서 오류가 발생하였습니다."
+          }));
         }
       }
     }
@@ -9343,9 +9357,9 @@ const EmptyProductList = newStyled.div`
   font-weight: 600;
   height: 200px;
 `;
-function ProductList({ data }) {
-  if (!data) return null;
-  return /* @__PURE__ */ jsxRuntimeExports.jsx(jsxRuntimeExports.Fragment, { children: data.length > 0 ? /* @__PURE__ */ jsxRuntimeExports.jsx(ProductList$1, { children: data.map((productItem) => /* @__PURE__ */ jsxRuntimeExports.jsx(
+function ProductList({ productItemList }) {
+  if (!productItemList) return null;
+  return /* @__PURE__ */ jsxRuntimeExports.jsx(jsxRuntimeExports.Fragment, { children: productItemList.length > 0 ? /* @__PURE__ */ jsxRuntimeExports.jsx(ProductList$1, { children: productItemList.map((productItem) => /* @__PURE__ */ jsxRuntimeExports.jsx(
     ProductItem,
     {
       product: productItem,
@@ -9561,11 +9575,12 @@ function FilterSortControl({
   ] });
 }
 const useData = ({ fetchFn, name }) => {
-  const context = reactExports.useContext(DataContext);
+  const context = reactExports.useContext(APIContext);
   if (!context) {
     throw new Error("useData는 DataProvider 내부에서 사용되어야 합니다.");
   }
   const { data, setData, isLoading, setIsLoading, setRefetchFunction } = context;
+  const hasdRefetch = reactExports.useRef(false);
   const fetchData = reactExports.useCallback(async () => {
     setIsLoading((prev2) => ({ ...prev2, [name]: true }));
     try {
@@ -9578,11 +9593,16 @@ const useData = ({ fetchFn, name }) => {
     }
   }, [fetchFn, name, setData, setIsLoading]);
   reactExports.useEffect(() => {
-    setRefetchFunction(name, fetchData);
+    if (!hasdRefetch.current) {
+      setRefetchFunction(name, fetchData);
+      hasdRefetch.current = true;
+    }
   }, [fetchData, name, setRefetchFunction]);
   reactExports.useEffect(() => {
-    fetchData();
-  }, [fetchData]);
+    if (data[name] === void 0) {
+      fetchData();
+    }
+  }, [data, name, fetchData]);
   return {
     data: data[name],
     isLoading: isLoading[name] ?? false,
@@ -9614,16 +9634,22 @@ const getProducts = async ({
   const data = await response.json();
   return data.content;
 };
-function ProductContent() {
-  const [filterOption, setFilterOption] = reactExports.useState("전체");
-  const [sortOption, setSortOption] = reactExports.useState("낮은 가격순");
+const useGetProductQuery = (filterOption, sortOption) => {
   const fetchProducts = reactExports.useCallback(() => {
     return getProducts({ filterOption, sortOption });
   }, [filterOption, sortOption]);
-  const { data: productData, isLoading } = useData({
+  return useData({
     fetchFn: fetchProducts,
-    name: "productData"
+    name: `productData-${filterOption}-${sortOption}`
   });
+};
+function ProductContent() {
+  const [filterOption, setFilterOption] = reactExports.useState("전체");
+  const [sortOption, setSortOption] = reactExports.useState("낮은 가격순");
+  const { data: productData, isLoading } = useGetProductQuery(
+    filterOption,
+    sortOption
+  );
   return /* @__PURE__ */ jsxRuntimeExports.jsxs(Container$2, { children: [
     /* @__PURE__ */ jsxRuntimeExports.jsx(Title, { children: "bpple 상품 목록" }),
     /* @__PURE__ */ jsxRuntimeExports.jsx(
@@ -9639,14 +9665,14 @@ function ProductContent() {
       ErrorBoundary,
       {
         fallback: /* @__PURE__ */ jsxRuntimeExports.jsx(ErrorFallback, { message: "상품 목록을 가져오는 중 에러가 발생하였습니다." }),
-        children: /* @__PURE__ */ jsxRuntimeExports.jsx(ProductList, { data: productData })
+        children: /* @__PURE__ */ jsxRuntimeExports.jsx(ProductList, { productItemList: productData })
       }
     )
   ] });
 }
 function RemoveCartItemButton({ id: id2 }) {
   const { mutate, isLoading, error } = useMutation(() => removeCartItem(id2));
-  const context = reactExports.useContext(DataContext);
+  const context = reactExports.useContext(APIContext);
   if (!context) {
     throw new Error("RemoveCartItemButton must be used within a DataProvider");
   }
@@ -9714,11 +9740,14 @@ const CloseButton = newStyled.button`
   border: none;
   cursor: pointer;
 `;
-function ProductPage() {
-  const { data: cartItemData, isLoading } = useData({
+const useGetCartItemsQuery = () => {
+  return useData({
     fetchFn: getCartItems,
     name: "cartItemData"
   });
+};
+function ProductPage() {
+  const { data: cartItemData, isLoading } = useGetCartItemsQuery();
   const [isOpen, setIsOpen] = reactExports.useState(false);
   const handleClick = () => {
     setIsOpen((prev2) => !prev2);
@@ -9756,7 +9785,7 @@ function ProductPage() {
   ] });
 }
 function App() {
-  return /* @__PURE__ */ jsxRuntimeExports.jsx(DataProvider, { children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+  return /* @__PURE__ */ jsxRuntimeExports.jsx(APIProvider, { children: /* @__PURE__ */ jsxRuntimeExports.jsx(
     ErrorBoundary,
     {
       fallback: /* @__PURE__ */ jsxRuntimeExports.jsx(ErrorFallback, { message: "애플리케이션을 불러오는 중 에러가 발생했습니다." }),
@@ -9804,7 +9833,7 @@ function MobileLayout({ children }) {
 async function enableMocking() {
   const isLocalhost = location.hostname === "localhost";
   const { worker } = await __vitePreload(async () => {
-    const { worker: worker2 } = await import("./browser-D0OTqxhg.js");
+    const { worker: worker2 } = await import("./browser-D3xH17UO.js");
     return { worker: worker2 };
   }, true ? [] : void 0);
   return worker.start({

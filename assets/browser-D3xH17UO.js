@@ -18645,227 +18645,230 @@ class HttpResponse extends (_d = FetchResponse$1, _c2 = bodyType, _d) {
   }
 }
 checkGlobals();
-const content$1 = [
-  {
-    id: 1,
-    name: "메이토1",
-    price: 1e3,
-    imageUrl: "",
-    category: "식료품",
-    quantity: 0
-  },
-  {
-    id: 2,
-    name: "메이토2",
-    price: 2e3,
-    imageUrl: "",
-    category: "식료품",
-    quantity: 10
-  },
-  {
-    id: 3,
-    name: "메이토3",
-    price: 1e3,
-    imageUrl: "",
-    category: "식료품",
-    quantity: 10
-  },
-  {
-    id: 4,
-    name: "메이토4",
-    price: 1e3,
-    imageUrl: "",
-    category: "식료품",
-    quantity: 10
-  },
-  {
-    id: 5,
-    name: "메이토5",
-    price: 1e3,
-    imageUrl: "",
-    category: "식료품",
-    quantity: 10
-  },
-  {
-    id: 6,
-    name: "메이토6",
-    price: 1e3,
-    imageUrl: "",
-    category: "식료품",
-    quantity: 10
-  },
-  {
-    id: 7,
-    name: "메이토7",
-    price: 1e3,
-    imageUrl: "",
-    category: "식료품",
-    quantity: 10
-  },
-  {
-    id: 8,
-    name: "메이토8",
-    price: 1e3,
-    imageUrl: "",
-    category: "식료품",
-    quantity: 10
-  },
-  {
-    id: 9,
-    name: "메이토9",
-    price: 1e3,
-    imageUrl: "",
-    category: "식료품",
-    quantity: 10
-  },
-  {
-    id: 10,
-    name: "메이토10",
-    price: 1e3,
-    imageUrl: "",
-    category: "식료품",
-    quantity: 10
-  },
-  {
-    id: 11,
-    name: "메이토11",
-    price: 1e3,
-    imageUrl: "",
-    category: "식료품",
-    quantity: 10
-  },
-  {
-    id: 12,
-    name: "메이토12",
-    price: 1e3,
-    imageUrl: "",
-    category: "식료품",
-    quantity: 10
-  },
-  {
-    id: 13,
-    name: "메이토13",
-    price: 1e3,
-    imageUrl: "",
-    category: "식료품",
-    quantity: 10
-  },
-  {
-    id: 14,
-    name: "메이토14",
-    price: 1e3,
-    imageUrl: "",
-    category: "식료품",
-    quantity: 10
-  },
-  {
-    id: 15,
-    name: "메이토15",
-    price: 1e3,
-    imageUrl: "",
-    category: "식료품",
-    quantity: 10
-  },
-  {
-    id: 16,
-    name: "메이토16",
-    price: 1e3,
-    imageUrl: "",
-    category: "식료품",
-    quantity: 10
-  },
-  {
-    id: 17,
-    name: "메이토17",
-    price: 1e3,
-    imageUrl: "",
-    category: "식료품",
-    quantity: 10
-  },
-  {
-    id: 18,
-    name: "메이토18",
-    price: 1e3,
-    imageUrl: "",
-    category: "식료품",
-    quantity: 10
-  },
-  {
-    id: 19,
-    name: "메이토19",
-    price: 1e3,
-    imageUrl: "",
-    category: "식료품",
-    quantity: 10
-  },
-  {
-    id: 20,
-    name: "메이토20",
-    price: 1e3,
-    imageUrl: "",
-    category: "패션잡화",
-    quantity: 10
-  }
-];
-const productData = {
-  content: content$1
-};
-const content = [
-  {
-    id: 2,
-    quantity: 2,
-    product: {
+const mockProductData = {
+  content: [
+    {
+      id: 1,
+      name: "메이토1",
+      price: 1e3,
+      imageUrl: "",
+      category: "식료품",
+      quantity: 0
+    },
+    {
       id: 2,
       name: "메이토2",
       price: 2e3,
       imageUrl: "",
-      category: "식료품"
-    }
-  },
-  {
-    id: 3,
-    quantity: 3,
-    product: {
+      category: "식료품",
+      quantity: 10
+    },
+    {
       id: 3,
       name: "메이토3",
-      price: 3e3,
+      price: 1e3,
       imageUrl: "",
-      category: "식료품"
-    }
-  },
-  {
-    id: 4,
-    quantity: 4,
-    product: {
+      category: "식료품",
+      quantity: 10
+    },
+    {
       id: 4,
       name: "메이토4",
-      price: 4e3,
+      price: 1e3,
       imageUrl: "",
-      category: "식료품"
-    }
-  },
-  {
-    id: 5,
-    quantity: 5,
-    product: {
+      category: "식료품",
+      quantity: 10
+    },
+    {
       id: 5,
       name: "메이토5",
-      price: 5e3,
+      price: 1e3,
       imageUrl: "",
-      category: "식료품"
+      category: "식료품",
+      quantity: 10
+    },
+    {
+      id: 6,
+      name: "메이토6",
+      price: 1e3,
+      imageUrl: "",
+      category: "식료품",
+      quantity: 10
+    },
+    {
+      id: 7,
+      name: "메이토7",
+      price: 1e3,
+      imageUrl: "",
+      category: "식료품",
+      quantity: 10
+    },
+    {
+      id: 8,
+      name: "메이토8",
+      price: 1e3,
+      imageUrl: "",
+      category: "식료품",
+      quantity: 10
+    },
+    {
+      id: 9,
+      name: "메이토9",
+      price: 1e3,
+      imageUrl: "",
+      category: "식료품",
+      quantity: 10
+    },
+    {
+      id: 10,
+      name: "메이토10",
+      price: 1e3,
+      imageUrl: "",
+      category: "식료품",
+      quantity: 10
+    },
+    {
+      id: 11,
+      name: "메이토11",
+      price: 1e3,
+      imageUrl: "",
+      category: "식료품",
+      quantity: 10
+    },
+    {
+      id: 12,
+      name: "메이토12",
+      price: 1e3,
+      imageUrl: "",
+      category: "식료품",
+      quantity: 10
+    },
+    {
+      id: 13,
+      name: "메이토13",
+      price: 1e3,
+      imageUrl: "",
+      category: "식료품",
+      quantity: 10
+    },
+    {
+      id: 14,
+      name: "메이토14",
+      price: 1e3,
+      imageUrl: "",
+      category: "식료품",
+      quantity: 10
+    },
+    {
+      id: 15,
+      name: "메이토15",
+      price: 1e3,
+      imageUrl: "",
+      category: "식료품",
+      quantity: 10
+    },
+    {
+      id: 16,
+      name: "메이토16",
+      price: 1e3,
+      imageUrl: "",
+      category: "식료품",
+      quantity: 10
+    },
+    {
+      id: 17,
+      name: "메이토17",
+      price: 1e3,
+      imageUrl: "",
+      category: "식료품",
+      quantity: 10
+    },
+    {
+      id: 18,
+      name: "메이토18",
+      price: 1e3,
+      imageUrl: "",
+      category: "식료품",
+      quantity: 10
+    },
+    {
+      id: 19,
+      name: "메이토19",
+      price: 1e3,
+      imageUrl: "",
+      category: "식료품",
+      quantity: 10
+    },
+    {
+      id: 20,
+      name: "메이토20",
+      price: 1e3,
+      imageUrl: "",
+      category: "패션잡화",
+      quantity: 10
     }
-  }
-];
-const cartItemData = {
-  content
+  ]
+};
+const mockCartData = {
+  content: [
+    {
+      id: 2,
+      quantity: 2,
+      product: {
+        id: 2,
+        name: "메이토2",
+        price: 2e3,
+        imageUrl: "",
+        category: "식료품",
+        quantity: 10
+      }
+    },
+    {
+      id: 3,
+      quantity: 3,
+      product: {
+        id: 3,
+        name: "메이토3",
+        price: 3e3,
+        imageUrl: "",
+        category: "식료품",
+        quantity: 10
+      }
+    },
+    {
+      id: 4,
+      quantity: 4,
+      product: {
+        id: 4,
+        name: "메이토4",
+        price: 4e3,
+        imageUrl: "",
+        category: "식료품",
+        quantity: 10
+      }
+    },
+    {
+      id: 5,
+      quantity: 5,
+      product: {
+        id: 5,
+        name: "메이토5",
+        price: 5e3,
+        imageUrl: "",
+        category: "식료품",
+        quantity: 10
+      }
+    }
+  ]
 };
 const baseUrl = "http://techcourse-lv2-alb-974870821.ap-northeast-2.elb.amazonaws.com";
+const MAX_CART_ITEM_QUANTITY = 50;
 const handlers = [
   http.get(`${baseUrl}/products`, ({ request }) => {
     const url = new URL(request.url);
     const category = url.searchParams.get("category");
     const sort = url.searchParams.get("sort");
-    let filtered = [...productData.content];
+    let filtered = [...mockProductData.content];
     if (category) {
       filtered = filtered.filter((item) => item.category === category);
     }
@@ -18879,12 +18882,14 @@ const handlers = [
     });
   }),
   http.get(`${baseUrl}/cart-items`, () => {
-    return HttpResponse.json(cartItemData);
+    return HttpResponse.json(mockCartData);
   }),
   //상품 상세 조회
   http.get(`${baseUrl}/products/:id`, ({ params }) => {
     const { id } = params;
-    const product = productData.content.find((item) => item.id === Number(id));
+    const product = mockProductData.content.find(
+      (item) => item.id === Number(id)
+    );
     if (!product) {
       return HttpResponse.json(
         { message: "Product not found" },
@@ -18896,7 +18901,7 @@ const handlers = [
   // 장바구니 상품 목록 조회
   http.get(`${baseUrl}/cart-items/:id`, ({ params }) => {
     const { id } = params;
-    const cartItem = cartItemData.content.find(
+    const cartItem = mockCartData.content.find(
       (item) => item.id === Number(id)
     );
     if (!cartItem) {
@@ -18911,7 +18916,7 @@ const handlers = [
   http.post(`${baseUrl}/cart-items`, async ({ request }) => {
     const body = await request.json();
     const { productId, quantity } = body;
-    if (quantity > 50) {
+    if (quantity > MAX_CART_ITEM_QUANTITY) {
       return HttpResponse.json(
         {
           errorCode: "OUT_OF_STOCK",
@@ -18923,9 +18928,9 @@ const handlers = [
     const newCartItem = {
       id: productId,
       quantity,
-      product: productData.content.find((p) => p.id === productId)
+      product: mockProductData.content.find((p) => p.id === productId)
     };
-    cartItemData.content.push(newCartItem);
+    mockCartData.content.push(newCartItem);
     return HttpResponse.json(newCartItem);
   }),
   // 장바구니 상품 수량 변경
@@ -18933,7 +18938,7 @@ const handlers = [
     const { id } = params;
     const body = await request.json();
     const { quantity } = body;
-    const item = cartItemData.content.find((item2) => item2.id === Number(id));
+    const item = mockCartData.content.find((item2) => item2.id === Number(id));
     if (!item) {
       return HttpResponse.json(
         { message: "Cart item not found" },
@@ -18945,7 +18950,7 @@ const handlers = [
   }),
   http.delete(`${baseUrl}/cart-items/:id`, ({ params }) => {
     const { id } = params;
-    const targetIndex = cartItemData.content.findIndex(
+    const targetIndex = mockCartData.content.findIndex(
       (item) => item.id === Number(id)
     );
     if (targetIndex === -1) {
@@ -18954,7 +18959,7 @@ const handlers = [
         { status: 404 }
       );
     }
-    const deletedItem = cartItemData.content.splice(targetIndex, 1)[0];
+    const deletedItem = mockCartData.content.splice(targetIndex, 1)[0];
     return HttpResponse.json(deletedItem);
   })
 ];
